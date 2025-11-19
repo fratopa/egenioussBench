@@ -1,0 +1,29 @@
+# Required parameters
+pred: /path/to/predicted_poses.csv
+gt: /path/to/ground_truth_poses.csv
+experiment: experiment_name_here
+output: results.csv
+
+# Coordinate system correction usefull tomove from opencv/gl conventions
+coordinate_correction:
+  apply_to_gt: false      # Apply correction to ground truth poses
+  apply_to_pred: false   # Apply correction to predicted poses
+  flip_y: true           # Flip Y axis
+  flip_z: true           # Flip Z axis
+
+# Accuracy thresholds (translation in meters, rotation in degrees)
+accuracy_thresholds:
+  strict:
+    translation: 0.5
+    rotation: 2.0
+  moderate:
+    translation: 2.0
+    rotation: 5.0
+  coarse:
+    translation: 5.0
+    rotation: 10.0
+
+# Visualization settings
+visualization:
+  frame_size_gt: 15.0    # Size of ground truth coordinate frames
+  frame_size_pred: 20.0  # Size of predicted coordinate frames

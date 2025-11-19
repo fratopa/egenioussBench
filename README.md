@@ -12,9 +12,9 @@
     <a href="https://scholar.google.com/citations?user=Cy4pRKkAAAAJ">Markus Gerke</a>
   </p>
   <h2 align="center"><p>
-    <a href="link_to_article" align="center">Paper</a> | 
-    <a href="link_to_egeniouss_page" align="center">Project Page</a> |
-    <a href="zenodo_link" align="center">Dataset</a>
+    <a  align="center">Paper</a> | 
+    <a href="https://www.egeniouss.eu/" align="center">Project Page</a> |
+    <a href="https://zenodo.org/records/17644019" align="center">Dataset</a>
   </p></h2>
   <div align="center"></div>
 </p>
@@ -66,16 +66,18 @@ The goal is to support research on scalable localisation pipelines that operate 
 
 ```
 egenioussBench/
-├── mesh/                       # Airborne 3D mesh (7.5 cm GSD)
 ├── lod2/                       # CityGML LoD2 model of Braunschweig
-├── queries/
-│   ├── val/                    # 412 sequential images (with GT poses)
-│   └── test/                   # 42 non-co-visible images (GT withheld)
-├── metadata/
-│   ├── camera_intrinsics.json
-│   ├── coordinate_frames.md
-│   └── sample_submission.csv
-└── meshloc_example/            # Example in meshloc format (to be decided)
+├── mesh/                       # Airborne 3D mesh (7.5 cm GSD)
+├── metadata
+│   └── camera_parameters.txt
+└── query_images
+    ├── test/                   # Test images
+    ├── test_android_poses.csv
+    ├── val/                    # Validation
+    ├── val_android_poses.txt
+    └── val_gt_poses.txt
+
+
 ```
 | Split          | Purpose                | Size                     | GT Available? |
 | -------------- | ---------------------- | ------------------------ | ------------- |
@@ -83,7 +85,7 @@ egenioussBench/
 | **Test**       | leaderboard evaluation | 42 non-co-visible images | ✗             |
 
 The test split is explicitly **non-co-visible** to enforce cold-start localisation.
-The dataset is available on [Zenodo](https://zenodo.org/records/XXXXX)
+The dataset is available on [Zenodo](https://zenodo.org/records/17644019)
 
 ### Components
 
@@ -112,7 +114,7 @@ Represents textureless, low-detail geometry for object-based localisation.
 * PPK + GCP/CP-aided bundle adjustment
 * Final pose accuracy:
 
-  * **4 cm** (XY) / **7 mm** (Z) mean
+  * **4 cm** (XY) / **7 cm** (Z) mean
   * **0.04°** mean orientation error
 
 
@@ -125,8 +127,11 @@ The benchmark evaluates **6-DoF camera poses** predicted for each query image.
 Participants submit a CSV file containing:
 
 ```
-image_id, tx, ty, tz, qw, qx, qy, qz
+# Ground truth poses for validation images
+# IMAGE_NAME qw qx qy qz UTMx UTMy alt
 ```
+
+We use the same camera coordinate definition as Pix4D, for reference please look at the [documentation](https://support.pix4d.com/hc/en-us/articles/202559089).
 
 ### Metrics
 
@@ -137,8 +142,11 @@ We report:
   * 0.5 m / 2°
   * 2 m / 5°
   * 5 m / 10°
+* **Outliers**
 * **Median translation error**
 * **Median rotation error**
+* **RMSE translation error**
+* **RMSE rotation error**
 
 Mesh-based and LoD2-based methods are evaluated **separately**.
 
@@ -150,14 +158,16 @@ We provide a lightweight Python evaluation script to self validate on the valida
 python eval.py \
     --pred poses.csv \
     --gt val/poses_gt.csv \
-    --config eval_config.yaml
+    --config eval_config.yaml \
+    --visualize true
+    --experiment debug
 ```
 
 ---
 
 ### Submissions
 
-Submissions should be sent by email to **examplemail@egeniouss.com**.  
+Submissions should be sent by email to **egeniouss@ait.ac.at**.  
 Evaluation results will be returned via the same address. Multiple submissions are allowed, but only **one submission per day** will be evaluated per team.
 
 By submitting, participants grant the organizers permission to publish the resulting scores on the public leaderboard.
@@ -196,6 +206,4 @@ If you use egenioussBench in research, please consider citing:
   <img src="assets/eu_logo.png" height="45">
 </p>
 
-This work is part of the EU-Horizon **egeniouss** project (grant no. 101082128).
-
-
+This work is part of the EU-Horizon **egeniouss** project.
