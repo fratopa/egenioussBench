@@ -12,7 +12,7 @@
     <a href="https://scholar.google.com/citations?user=Cy4pRKkAAAAJ">Markus Gerke</a>
   </p>
   <h2 align="center"><p>
-    <a  align="center">Paper</a> | 
+    <a href="https://isprs-archives.copernicus.org/articles/XLVIII-1-W6-2025/75/2025/" align="center">Paper</a> | 
     <a href="https://www.egeniouss.eu/" align="center">Project Page</a> |
     <a href="https://zenodo.org/records/17644019" align="center">Dataset</a>
   </p></h2>
