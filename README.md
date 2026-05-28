@@ -27,6 +27,8 @@
 <em>egenioussBench couples a city-scale aerial 3D mesh, a CityGML LoD2 model, and centimetre-accurate smartphone ground-truth poses to benchmark mesh- and object-based localisation under realistic, city-scale conditions.</em>
 </p>
 
+---
+⚠️ **Submission deadline extended to November 2026**⚠️ 
 
 ---
 ## Table of Contents
@@ -172,14 +174,14 @@ Evaluation results will be returned via the same address. Multiple submissions a
 
 By submitting, participants grant the organizers permission to publish the resulting scores on the public leaderboard.
 
-## Baseline
 
-We include simple reference baselines demonstrating usage of the dataset.
-These currently include:
+---
 
-* **Mesh-based baseline** Based on Meshloc, explains how to 
+### Notes
 
+- We are aware that the orientation in the pose prior files `*_android_poses.csv` are uneliable. This is caused by the internal magnetometer of the smartphone converging to the wrong orientation. We suggest not to rely on the orientation priors to bootstrap the camera orientation. 
 
+- We have extended the deadline for submission of the results to November 2026
 
 ---
 
